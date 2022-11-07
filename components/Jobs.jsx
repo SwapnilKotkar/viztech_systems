@@ -11,8 +11,8 @@ import {
   BiUser,
 } from "react-icons/bi";
 
-const Jobs = ({ jobsData }) => {
-  const [jobs, setJobs] = useState(jobsData);
+const Jobs = ({ jobs }) => {
+  const [jobsData, setJobsData] = useState(jobs);
 
   const truncate = (str, n) => {
     return str?.length > n ? str.slice(0, n) : str;
@@ -41,7 +41,7 @@ const Jobs = ({ jobsData }) => {
   return (
     <>
       <div className="my-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {jobs?.map((job, index) => (
+        {jobsData?.map((job, index) => (
           <div
             key={index}
             className="px-5 py-7 space-y-5 bg-white border border-gray-300 rounded-lg"

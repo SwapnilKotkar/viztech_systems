@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FiArrowUpRight } from "react-icons/fi";
 
 const Careers = ({ jobsData }) => {
-  const [jobs, setJobs] = useState(jobsData);
+  const [jobs, setJobs] = useState();
 
   // const filters = [
   //   "View all",
@@ -18,6 +18,18 @@ const Careers = ({ jobsData }) => {
   const truncate = (str, n) => {
     return str?.length > n ? str.slice(0, n) : str;
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await fetch('/api/jobs');
+      const jobsData = await result.json();
+      setJobs(jobsData);
+    };
+
+    fetchData();
+  
+  }, [])
+  
 
   return (
     <div className="max-w-screen-2xl px-4 md:px-8 mx-auto">
@@ -91,15 +103,6 @@ const Careers = ({ jobsData }) => {
   );
 };
 
-export const getStaticProps = async () => {
-  const result = await fetch("http://localhost:3000/api/jobs");
-  const jobsData = await result.json();
-  return {
-    props: {
-      jobsData,
-    },
-  };
-};
 
 export default Careers;
 

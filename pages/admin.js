@@ -3,19 +3,28 @@ import Link from "next/link";
 import View from "../components/View";
 import { BiPlus } from "react-icons/bi";
 
-const Admin = ({ jobsData }) => {
-  const [value, setValue] = useState("jobs");
+const Admin = () => {
+  const [value, setValue] = useState("Applied Candidates");
+  const [jobs, setJobs] = useState();
 
   const handleClick = (val) => {
     setValue(val);
   };
 
-  const filters = ["Jobs", "Applied Candidates" ]; //"Approved Candidates"
+  const filters = [ "Applied Candidates", "Jobs" ]; //"Approved Candidates"
 
   useEffect(() => {
     if (!localStorage.getItem("signin_token")) {
       Router.push("/login");
     }
+
+    const fetchData = async () => {
+      const result = await fetch('/api/jobs');
+      const jobsData = await result.json();
+      setJobs(jobsData);
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -46,21 +55,10 @@ const Admin = ({ jobsData }) => {
         </Link>
       </div>
       <div>
-        <View val={value} jobsData={jobsData}></View>
+        <View val={value} jobs={jobs}></View>
       </div>
     </div>
   );
-};
-
-export const getStaticProps = async () => {
-  const result = await fetch("http://localhost:3000/api/jobs");
-  const jobsData = await result.json();
-
-  return {
-    props: {
-      jobsData,
-    },
-  };
 };
 
 export default Admin;
