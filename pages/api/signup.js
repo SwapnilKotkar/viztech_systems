@@ -1,7 +1,7 @@
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
-import db from "../../lib/mongodb";
+import db from "../../database/mongodb";
 import admin from "../../models/adminSchema";
 
 const signup = async (req, res) => {
