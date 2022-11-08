@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
 import toast from "react-hot-toast";
 import Router from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  BsFillCheckSquareFill,
-  BsFillTrashFill,
-  BsPersonCircle,
-} from "react-icons/bs";
+import { BsFillTrashFill, BsPersonCircle } from "react-icons/bs";
 import { getResumes, deleteResume } from "../actions/Resumes";
 
 const AppliedCandidates = () => {
   const dispatch = useDispatch();
   const resumes = useSelector((state) => state.resumeReducer);
-
 
   const tableHeadders = [
     "Name",
@@ -114,13 +108,6 @@ const AppliedCandidates = () => {
                       </a>
                     </td>
                     <td className="py-4 px-6">
-                      {/* <button
-                        type="button"
-                        onClick={() => handleApprove(resume)}
-                        className="text-xl text-green-500 md:mr-3 my-1"
-                      >
-                        <BsFillCheckSquareFill />
-                      </button> */}
                       <button
                         type="button"
                         onClick={() => dispatch(deleteResume(resume._id))}

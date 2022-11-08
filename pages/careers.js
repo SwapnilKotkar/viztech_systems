@@ -5,31 +5,19 @@ import { FiArrowUpRight } from "react-icons/fi";
 const Careers = ({ jobsData }) => {
   const [jobs, setJobs] = useState();
 
-  // const filters = [
-  //   "View all",
-  //   "Web dev",
-  //   "Java dev",
-  //   "Fullstack",
-  //   "Python",
-  //   "React",
-  // ];
-  // const [style, setStyle] = useState(false);
-
   const truncate = (str, n) => {
     return str?.length > n ? str.slice(0, n) : str;
   };
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetch('/api/jobs');
+      const result = await fetch("/api/jobs");
       const jobsData = await result.json();
       setJobs(jobsData);
     };
 
     fetchData();
-  
-  }, [])
-  
+  }, []);
 
   return (
     <div className="max-w-screen-2xl px-4 md:px-8 mx-auto">
@@ -53,24 +41,9 @@ const Careers = ({ jobsData }) => {
         </p>
       </div>
 
-      {/* <div className="space-x-4 block w-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide">
-        {filters.map((value, index) => (
-          <div key={index} className="inline-block">
-            <button
-              className={`border-2 border-gray-900 rounded-[100px] py-2 px-3 text-sm md:text-base font-semibold ${
-                style ? "bg-black text-white" : null
-              }`}
-              onClick={() => setStyle((prev) => !prev)}
-            >
-              {value}
-            </button>
-          </div>
-        ))}
-      </div> */}
-
       {jobs?.map((job, index) => (
         <div key={index} className="my-4">
-          <div className=" flex flex-col md:flex-row space-y-2 p-6 border-t-2 border-gray-400">
+          <div className=" flex flex-col md:flex-row space-y-2 md:p-6 py-6 border-t-2 border-gray-400">
             <div className="space-y-3 md:w-[80%]">
               <p className="text-2xl font-semibold">{job.title}</p>
               <p>
@@ -87,13 +60,13 @@ const Careers = ({ jobsData }) => {
               </div>
             </div>
             <div className="md:w-[20%] flex justify-end items-start">
-            <Link href={`/job/${job._id}`}>
-              <div className="flex space-x-1 hover:text-gray-700 cursor-pointer">
-                <p className="font-semibold text-2xl md:text-3xl lg:text-4xl">
-                  View
-                </p>
-                <FiArrowUpRight className="text-4xl md:text-5xl" />
-              </div>
+              <Link href={`/job/${job._id}`}>
+                <div className="flex space-x-1 hover:text-gray-700 cursor-pointer">
+                  <p className="font-semibold text-2xl md:text-3xl lg:text-4xl">
+                    View
+                  </p>
+                  <FiArrowUpRight className="text-4xl md:text-5xl" />
+                </div>
               </Link>
             </div>
           </div>
@@ -103,6 +76,4 @@ const Careers = ({ jobsData }) => {
   );
 };
 
-
 export default Careers;
-

@@ -1,9 +1,8 @@
 import React from "react";
 import AppliedCandidates from "./AppliedCandidates";
-import ApprovedCandidates from "./ApprovedCandidates";
 import Jobs from "./Jobs";
 
-const View = ({val, setCurrentId, setShow}) => {
+const View = ({ val, setCurrentId, setShow }) => {
   switch (val) {
     case "Jobs":
       return (
@@ -16,13 +15,6 @@ const View = ({val, setCurrentId, setShow}) => {
       return (
         <>
           <AppliedCandidates />
-        </>
-      );
-
-    case "Approved Candidates":
-      return (
-        <>
-          <ApprovedCandidates />
         </>
       );
 

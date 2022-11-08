@@ -1,6 +1,5 @@
 import Jobs from "../models/jobSchema";
 import Resumes from "../models/resumeSchema";
-// import ApprovedResumes from "../models/approvedResumesSchema";
 
 //  Controllers //
 
