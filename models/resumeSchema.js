@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const resumeSchema = mongoose.Schema({
-    title: String,
+    applyingFor: String,
     fullName: String,
     phone_number: String,
     emailID: String,

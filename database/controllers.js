@@ -1,6 +1,6 @@
 import Jobs from "../models/jobSchema";
 import Resumes from "../models/resumeSchema";
-import ApprovedResumes from "../models/approvedResumesSchema";
+// import ApprovedResumes from "../models/approvedResumesSchema";
 
 //  Controllers //
 
@@ -91,6 +91,22 @@ export const getResumes = async (req, res) => {
   }
 };
 
+export const createResume = async (req, res) => {
+  try {
+    const resumeData = req.body;
+
+    console.log("resume", resumeData)
+
+    Resumes.create(resumeData, function (err, data) {
+      return res.status(200).json(data);
+    });
+    
+  } catch (error) {
+    res.status(404).json({ error: "Error while submitting resume" });
+    console.log(error);
+  }
+}
+
 export const deleteResume = async (req, res) => {
   try {
     const { resumeId } = req.query;
@@ -105,28 +121,3 @@ export const deleteResume = async (req, res) => {
     console.log(error);
   }
 };
-
-// export const ApproveResume = async (req, res) => {
-//   try {
-//     const { resumeId } = req.query;
-//     const resumeData = req.body;
-
-//     console.log("resumeId",resumeId)
-//     console.log("resumedata",resumeData)
-
-
-//     if (resumeId && resumeData) {
-//       const resume = await Resumes.findByIdAndDelete(resumeId);
-
-//       if(resume){
-//         ApprovedResumes.create(resumeData, function (err, data) {
-//           return res.status(200).json(data);
-//         });
-//       }
-//     }
-//     res.status(404).json({ error: "Resume Id not provided for approving..." });
-//   } catch (error) {
-//     res.status(404).json({ error: "Error while approving resume" });
-//     console.log(error);
-//   }
-// };

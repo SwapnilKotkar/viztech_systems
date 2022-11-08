@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Router from "next/router";
 import toast from "react-hot-toast";
+import { createJobs } from "../actions/jobs";
+import { useDispatch } from "react-redux";
 
 const Postjob = () => {
+  const dispatch = useDispatch();
+
   const date = new Date().toISOString().slice(0, 10);
 
   const [formData, setFormData] = useState({
@@ -24,43 +28,8 @@ const Postjob = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const {
-      title,
-      location,
-      salary,
-      experience,
-      vacancies,
-      skills,
-      description,
-      posted_on,
-    } = formData;
+    dispatch(createJobs(formData));
 
-    const res = await fetch("/api/jobs", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title,
-        location,
-        salary,
-        experience,
-        vacancies,
-        skills,
-        description,
-        posted_on,
-      }),
-    });
-
-    const data = await res.json();
-
-    if (res.status === 200) {
-      toast.remove();
-      toast.success("Job posted");
-    } else {
-      toast.remove();
-      toast.error("Failed to post job");
-    }
     setFormData({
       title: "",
       location: "",
@@ -73,7 +42,7 @@ const Postjob = () => {
     });
 
     setTimeout(() => {
-      Router.push('/admin')
+      Router.push("/admin");
     }, 500);
   };
 

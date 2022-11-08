@@ -1,9 +1,6 @@
 import db from "../../../database/mongodb";
-import {
-  getResumes,
-  deleteResume,
-  ApproveResume,
-} from "../../../database/controllers";
+
+import { createResume, getResumes, deleteResume } from '../../../database/controllers'
 
 export default async function handler(req, res) {
   db().catch((error) => res.status(405).json({ database_error: error }));
@@ -15,9 +12,9 @@ export default async function handler(req, res) {
     case "GET":
       getResumes(req, res);
       break;
-    // case "POST":
-    //   ApproveResume(req, res);
-    //   break;
+    case "POST":
+      createResume(req, res);
+      break;
     case "DELETE":
       deleteResume(req, res);
       break;

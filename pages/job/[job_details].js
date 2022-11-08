@@ -2,16 +2,22 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import S3 from "react-aws-s3";
+import { useSelector, useDispatch } from "react-redux";
+import { getJob } from "../../actions/jobs";
+import { createResume } from "../../actions/Resumes";
 
 const JobDetails = () => {
+  const dispatch = useDispatch();
+  const job = useSelector((state) => state.jobsReducer);
+
+  const router = useRouter();
+  const { job_details } = router.query;
+
   const [jobdata, setJobdata] = useState({});
   const [fileStatus, setFileStatus] = useState(false);
 
   let title;
   const uniqueID = new Date().getTime();
-
-  const router = useRouter();
-  const { job_details } = router.query;
 
   const [candidateData, setCandidateData] = useState({
     applyingFor: "",
@@ -61,48 +67,10 @@ const JobDetails = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    toast.loading("Submitting resume...");
-
-    const {
-      title,
-      fullName,
-      phone_number,
-      emailID,
-      notice_period,
-      comments,
-      resumeURL,
-    } = candidateData;
-
-    const res = await fetch("/api/submit_resume", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        title: jobdata.title,
-        fullName,
-        phone_number,
-        emailID,
-        notice_period: notice_period + " days",
-        comments,
-        resumeURL,
-      }),
-    });
-
-    if (res.status === 200) {
-      toast.remove();
-      toast.success("Resume Submitted");
-      setTimeout(() => {
-        router.push("/careers");
-      }, 500);
-    } else {
-      toast.remove();
-      toast.error("Upload failed");
-      setFileStatus(false);
-    }
+    dispatch(createResume(candidateData));
 
     setCandidateData({
-      title: "",
+      applyingFor: "",
       fullName: "",
       phone_number: "",
       emailID: "",
@@ -110,17 +78,15 @@ const JobDetails = () => {
       comments: "",
       resumeURL: "",
     });
+
+    setTimeout(() => {
+      router.push("/careers");
+    }, 500);
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetch(`/api/jobs/${job_details}`);
-      const JobDetails = await result.json();
-      setJobdata(JobDetails);
-    };
-
-    fetchData();
-  }, []);
+    dispatch(getJob(job_details));
+  }, [dispatch, job_details]);
 
   return (
     <>
@@ -133,33 +99,33 @@ const JobDetails = () => {
 
         <div className="bg-white p-4 my-4 space-y-6">
           <div>
-            <h1 className="text-3xl font-bold">{jobdata?.title}</h1>
+            <h1 className="text-3xl font-bold">{job?.title}</h1>
           </div>
           <div>
             <div className="inline-grid grid-cols-2 sm:grid-cols-4 gap-2">
               <div className="inline-flex justify-center items-center border-2 border-gray-900 rounded-[100px] py-2 px-3 text-sm">
-                Location: {jobdata?.location}
+                Location: {job?.location}
               </div>
               <div className="inline-flex justify-center items-center border-2 border-gray-900 rounded-[100px] py-2 px-3 text-sm">
-                {jobdata?.experience} years experience
+                {job?.experience} years experience
               </div>
               <div className="inline-flex justify-center items-center border-2 border-gray-900 rounded-[100px] py-2 px-3 text-sm">
-                {jobdata?.vacancies} vacancies
+                {job?.vacancies} vacancies
               </div>
               <div className="inline-flex justify-center items-center border-2 border-gray-900 rounded-[100px] py-2 px-3 text-sm">
-                Salary: {jobdata?.salary}
+                Salary: {job?.salary}
               </div>
             </div>
           </div>
           <div>
             <h1 className="text-xl">
               <span className="font-semibold">Skills Needed:</span>{" "}
-              {jobdata?.skills}
+              {job?.skills}
             </h1>
           </div>
           <div className="space-y-2">
             <h1 className="text-xl font-semibold">Full description:</h1>
-            <h2>{jobdata?.description}</h2>
+            <h2>{job?.description}</h2>
           </div>
         </div>
 
@@ -173,11 +139,12 @@ const JobDetails = () => {
               <div className="flex flex-col lg:flex-row space-y-8 lg:space-y-0 lg:space-x-6">
                 <input
                   type="text"
-                  placeholder="Job title"
-                  className="p-4 bg-[#E6E6E6] flex-none lg:flex-1 rounded-md cursor-not-allowed italic text-gray-700"
+                  placeholder="Applying for"
+                  className="p-4 bg-[#E6E6E6] flex-none lg:flex-1 rounded-md italic text-gray-700"
                   name="applyingFor"
-                  value={jobdata?.title}
-                  disabled
+                  value={candidateData?.applyingFor}
+                  onChange={handleChange}
+                  required
                 />
                 <input
                   type="text"

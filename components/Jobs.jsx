@@ -1,47 +1,38 @@
-import React, { useState, useEffect } from "react";
-import Link from "next/link";
-import Router from "next/router";
-import toast from "react-hot-toast";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getJobs, deleteJob } from "../actions/jobs";
 
 import {
   BiCurrentLocation,
   BiRupee,
-  BiTime,
   BiBriefcaseAlt2,
   BiUser,
 } from "react-icons/bi";
 
-const Jobs = ({ jobs }) => {
-  const [jobsData, setJobsData] = useState(jobs);
+const Jobs = ({ setCurrentId, setShow }) => {
+  const dispatch = useDispatch();
+  const jobs = useSelector((state) => state.jobsReducer);
 
   const truncate = (str, n) => {
     return str?.length > n ? str.slice(0, n) : str;
   };
 
   const handleDelete = async (id) => {
-    toast.loading("job deleting...");
-
-    const res = await fetch(`/api/jobs/?jobId=${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (res.status === 200) {
-      toast.remove();
-      toast.success("Job deleted");
-      window.location.reload("/admin");
-    } else {
-      toast.remove();
-      toast.error("Failed to delete job");
-    }
   };
+
+  const handleChange = () => {
+    setShow((prev) => !prev);
+    document.documentElement.scrollTop = 0;
+  };
+
+  useEffect(() => {
+    dispatch(getJobs());
+  }, [dispatch]);
 
   return (
     <>
       <div className="my-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {jobsData?.map((job, index) => (
+        {jobs?.map((job, index) => (
           <div
             key={index}
             className="px-5 py-7 space-y-5 bg-white border border-gray-300 rounded-lg"
@@ -81,17 +72,22 @@ const Jobs = ({ jobs }) => {
             </p>
             <div className="flex justify-end">
               <div className="space-x-2">
-                <button
-                  className="border-2 border-[#6C63FF] text-[#6C63FF] rounded-[100px] py-2 px-8"
-                  onClick={() => handleDelete(job._id)}
-                >
-                  Delete
-                </button>
-                <Link href={`editjob/${job._id}`}>
-                  <button className="border-2 bg-[#6C63FF] text-white rounded-[100px] py-2 px-11">
+                <div className="inline-block">
+                  <button
+                    className="border-2 border-[#6C63FF] text-[#6C63FF] rounded-[100px] py-2 px-8"
+                    onClick={() => dispatch(deleteJob(job._id))}
+                  >
+                    Delete
+                  </button>
+                </div>
+                <div className="inline-block" onClick={handleChange}>
+                  <button
+                    className="border-2 bg-[#6C63FF] text-white rounded-[100px] py-2 px-11"
+                    onClick={() => setCurrentId(job._id)}
+                  >
                     Edit
                   </button>
-                </Link>
+                </div>
               </div>
             </div>
           </div>

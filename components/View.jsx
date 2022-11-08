@@ -3,12 +3,12 @@ import AppliedCandidates from "./AppliedCandidates";
 import ApprovedCandidates from "./ApprovedCandidates";
 import Jobs from "./Jobs";
 
-const View = ({val, jobs}) => {
+const View = ({val, setCurrentId, setShow}) => {
   switch (val) {
     case "Jobs":
       return (
         <>
-          <Jobs jobs={jobs} />
+          <Jobs setCurrentId={setCurrentId} setShow={setShow} />
         </>
       );
 
@@ -27,7 +27,7 @@ const View = ({val, jobs}) => {
       );
 
     default:
-      return <Jobs jobs={jobs}/>;
+      return <Jobs setCurrentId={setCurrentId} setShow={setShow} />;
   }
 };
 

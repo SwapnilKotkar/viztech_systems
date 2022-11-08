@@ -1,11 +1,5 @@
 import db from "../../../database/mongodb";
-import {
-  getJobs,
-  getJob,
-  postJobs,
-  putJob,
-  deleteJob,
-} from "../../../database/controllers";
+import { getJob } from "../../../database/controllers";
 
 export default async function handler(req, res) {
   db().catch((error) => res.status(405).json({ database_error: error }));

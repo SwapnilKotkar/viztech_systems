@@ -2,14 +2,18 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import Router from "next/router";
+import { useSelector, useDispatch } from "react-redux";
 import {
   BsFillCheckSquareFill,
   BsFillTrashFill,
   BsPersonCircle,
 } from "react-icons/bs";
+import { getResumes, deleteResume } from "../actions/Resumes";
 
 const AppliedCandidates = () => {
-  const [resumesList, setResumesList] = useState();
+  const dispatch = useDispatch();
+  const resumes = useSelector((state) => state.resumeReducer);
+
 
   const tableHeadders = [
     "Name",
@@ -20,8 +24,7 @@ const AppliedCandidates = () => {
     "Action",
   ];
 
-  // const handleApprove = () => {}
-  const handleRemove = async(id) => {
+  const handleRemove = async (id) => {
     const res = await fetch(`/api/resumes/resumes/?resumeId=${id}`, {
       method: "DELETE",
       headers: {
@@ -39,21 +42,13 @@ const AppliedCandidates = () => {
       toast.remove();
       toast.error("Failed to delete");
     }
-  }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetch('/api/resumes/resumes');
-      const resumes = await result.json();
-      setResumesList(resumes);
-    };
+    dispatch(getResumes());
+  }, [dispatch]);
 
-    fetchData();
-  
-  }, [])
-  
-
-  return(
+  return (
     <>
       <div className="pt-3 pb-10">
         <div className="max-w-7xl px-4 mx-auto sm:px-6 lg:px-8">
@@ -80,7 +75,7 @@ const AppliedCandidates = () => {
                 </tr>
               </thead>
               <tbody className="text-sm">
-                {resumesList?.map((resume) => (
+                {resumes?.map((resume) => (
                   <tr
                     key={resume._id}
                     className="bg-white border-b border-gray-300 hover:bg-gray-200 "
@@ -105,7 +100,11 @@ const AppliedCandidates = () => {
                     <td className="py-4 px-6">{resume.notice_period}</td>
                     <td className="py-4 px-6 max-w-sm">{resume.comments}</td>
                     <td className="py-4 px-6">
-                      <a href={resume.resumeURL} target='_blank' rel="noreferrer">
+                      <a
+                        href={resume.resumeURL}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
                         <a
                           className="font-medium text-blue-500 hover:underline md:mx-1 my-1"
                           target="_blank"
@@ -124,7 +123,7 @@ const AppliedCandidates = () => {
                       </button> */}
                       <button
                         type="button"
-                        onClick={() => handleRemove(resume._id)}
+                        onClick={() => dispatch(deleteResume(resume._id))}
                         className="text-xl text-red-500 md:ml-3 my-1"
                       >
                         <BsFillTrashFill />
@@ -138,7 +137,7 @@ const AppliedCandidates = () => {
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default AppliedCandidates;
