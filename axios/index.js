@@ -2,7 +2,7 @@ import axios from 'axios'
 
 // const axiosAPI = axios.create({baseURl: 'https://localhost:3000/'})
 
-const url = 'http://localhost:3000/api'
+const url = 'https://viztech-systems.vercel.app/api'
 
 export const fetchJobs = () => axios.get(`${url}/jobs`)
 export const fetchJob = (id) => axios.get(`${url}/jobs/${id}`)
