@@ -67,6 +67,8 @@ const JobDetails = () => {
 
     dispatch(createResume(candidateData));
 
+    toast.success('resume submitted')
+
     setCandidateData({
       applyingFor: "",
       fullName: "",

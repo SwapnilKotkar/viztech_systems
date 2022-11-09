@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { MdAlternateEmail } from "react-icons/md";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-
-import { loginAdmin } from "../actions/admin";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -23,12 +22,31 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    dispatch(loginAdmin(login));
+    toast.loading("Logging in...");
 
-    setTimeout(() => {
-      // router.push("/");
-      window.location.replace('/')
-    }, 500);
+    const res = await fetch("/api/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(login),
+    });
+
+    const data = await res.json();
+
+    if (res.status === 200) {
+      toast.remove();
+      toast.success("Login Success!");
+
+      localStorage.setItem("profile", JSON.stringify(data));
+
+      setTimeout(() => {
+        router.push("/admin");
+      }, 500);
+    } else {
+      toast.remove();
+      toast.error("login failed");
+    }
 
     setLogin({
       email: "",

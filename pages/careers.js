@@ -14,7 +14,7 @@ const Careers = () => {
 
   useEffect(() => {
     dispatch(getJobs());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="max-w-screen-2xl px-4 md:px-8 mx-auto">
@@ -38,10 +38,8 @@ const Careers = () => {
         </p>
       </div>
 
-      {
-        jobs ? (
-          <div>
-        {jobs?.map((job, index) => (
+      {jobs ? (
+        jobs?.map((job, index) => (
           <div key={index} className="my-4">
             <div className=" flex flex-col md:flex-row space-y-2 md:p-6 py-6 border-t-2 border-gray-400">
               <div className="space-y-3 md:w-[80%]">
@@ -71,12 +69,14 @@ const Careers = () => {
               </div>
             </div>
           </div>
-        ))}
-      </div>
-        ) : (
-          <div className=" p-4"><span className="text-xl font-bold text-gray-700">Loading jobs....</span></div>
-        )
-      }
+        ))
+      ) : (
+        <div className=" p-4">
+          <span className="text-xl font-bold text-gray-700">
+            Loading jobs....
+          </span>
+        </div>
+      )}
     </div>
   );
 };

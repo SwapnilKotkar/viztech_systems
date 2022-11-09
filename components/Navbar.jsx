@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 
-import { logoutAdmin } from "../actions/admin";
-
 const Navbar = () => {
-  const dispatch = useDispatch();
-
   const router = useRouter();
 
   const [open, setOpen] = useState(false);
@@ -22,12 +17,10 @@ const Navbar = () => {
   ];
 
   const logout = () => {
-    dispatch(logoutAdmin());
+    localStorage.removeItem("profile");
   };
 
   useEffect(() => {
-    // const token = admin?.token;
-
     setAdmin(JSON.parse(localStorage.getItem("profile")));
   }, [router.query]);
 

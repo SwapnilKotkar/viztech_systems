@@ -7,6 +7,3 @@ export const DELETE_JOB = "DELETE_JOB";
 export const FETCH_RESUMES = "FETCH_RESUMES";
 export const CREATE_RESUME = "CREATE_RESUME";
 export const DELETE_RESUME = "DELETE_RESUME";
-
-export const LOGGED_IN = "LOGGED_IN"
-export const LOGOUT = "LOGOUT";
