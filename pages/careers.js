@@ -1,22 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { FiArrowUpRight } from "react-icons/fi";
+import { getJobs } from "../actions/jobs";
+import { useSelector, useDispatch } from "react-redux";
 
-const Careers = ({ jobsData }) => {
-  const [jobs, setJobs] = useState();
+const Careers = () => {
+  const jobs = useSelector((state) => state.jobsReducer);
+  const dispatch = useDispatch();
 
   const truncate = (str, n) => {
     return str?.length > n ? str.slice(0, n) : str;
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetch("/api/jobs");
-      const jobsData = await result.json();
-      setJobs(jobsData);
-    };
-
-    fetchData();
+    dispatch(getJobs());
   }, []);
 
   return (
@@ -41,37 +38,45 @@ const Careers = ({ jobsData }) => {
         </p>
       </div>
 
-      {jobs?.map((job, index) => (
-        <div key={index} className="my-4">
-          <div className=" flex flex-col md:flex-row space-y-2 md:p-6 py-6 border-t-2 border-gray-400">
-            <div className="space-y-3 md:w-[80%]">
-              <p className="text-2xl font-semibold">{job.title}</p>
-              <p>
-                {truncate(job.description, 200)}{" "}
-                <span className="font-bold">...</span>{" "}
-              </p>
-              <div className="space-x-2">
-                <div className="inline-block border-2 border-gray-900 rounded-[100px] py-2 px-3 text-sm">
-                  {job.location}
-                </div>
-                <div className="inline-block border-2 border-gray-900 rounded-[100px] py-2 px-3 text-sm">
-                  {job.experience} yrs experience{" "}
+      {
+        jobs ? (
+          <div>
+        {jobs?.map((job, index) => (
+          <div key={index} className="my-4">
+            <div className=" flex flex-col md:flex-row space-y-2 md:p-6 py-6 border-t-2 border-gray-400">
+              <div className="space-y-3 md:w-[80%]">
+                <p className="text-2xl font-semibold">{job.title}</p>
+                <p>
+                  {truncate(job.description, 200)}{" "}
+                  <span className="font-bold">...</span>{" "}
+                </p>
+                <div className="space-x-2">
+                  <div className="inline-block border-2 border-gray-900 rounded-[100px] py-2 px-3 text-sm">
+                    {job.location}
+                  </div>
+                  <div className="inline-block border-2 border-gray-900 rounded-[100px] py-2 px-3 text-sm">
+                    {job.experience} yrs experience{" "}
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="md:w-[20%] flex justify-end items-start">
-              <Link href={`/job/${job._id}`}>
-                <div className="flex space-x-1 hover:text-gray-700 cursor-pointer">
-                  <p className="font-semibold text-2xl md:text-3xl lg:text-4xl">
-                    View
-                  </p>
-                  <FiArrowUpRight className="text-4xl md:text-5xl" />
-                </div>
-              </Link>
+              <div className="md:w-[20%] flex justify-end items-start">
+                <Link href={`/job/${job._id}`}>
+                  <div className="flex space-x-1 hover:text-gray-700 cursor-pointer">
+                    <p className="font-semibold text-2xl md:text-3xl lg:text-4xl">
+                      View
+                    </p>
+                    <FiArrowUpRight className="text-4xl md:text-5xl" />
+                  </div>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
+        ) : (
+          <div className=" p-4"><span className="text-xl font-bold text-gray-700">Loading jobs....</span></div>
+        )
+      }
     </div>
   );
 };

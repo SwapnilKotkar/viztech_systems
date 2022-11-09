@@ -1,7 +1,55 @@
+import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
+
 import Jobs from "../models/jobSchema";
 import Resumes from "../models/resumeSchema";
+import Admin from '../models/adminSchema'
 
 //  Controllers //
+
+export const signinAdmin = async (req, res) => {
+  const {email, password} = req.body;
+
+  try {
+    const user = await Admin.findOne({ email: email })
+
+    if(!user) return res.status(404).json({message: "User doesn't exist."})
+
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
+
+    if(!isPasswordCorrect) return res.status(400).json({message: "Invalid Credentials."})
+
+    const token = jwt.sign({email: user.email, id: user._id}, process.env.JWT_SECRET_KEY, { expiresIn: "10d" })
+
+    res.status(200).json({ result: user, token })
+ 
+    } catch (error) {
+        res.status(500).json({ message: 'something went wrong' })
+        console.log(error)
+    }
+}
+
+export const signupAdmin = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const user = await Admin.findOne({ email: email });
+
+    if (user) return res.status(400).json({ message: "User already exist." });
+
+    const hashedPassword = await bcrypt.hash(password, 12)
+
+    const newUser = await Admin.create({ email: email, password: hashedPassword });
+
+    const token = jwt.sign({email: newUser.email, id: newUser._id}, process.env.JWT_SECRET_KEY, { expiresIn: "10d" })
+
+    res.status(200).json({ result, token })
+
+  } catch (error) {
+    res.status(500).json({ message: 'something went wrong' })
+    console.log(error)
+  }
+};
 
 export const getJobs = async (req, res) => {
   try {

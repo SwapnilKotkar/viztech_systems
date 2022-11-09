@@ -1,19 +1,22 @@
 import axios from 'axios'
 
-// const axiosAPI = axios.create({baseURl: 'https://localhost:3000/'})
+const axiosURL = axios.create({baseURL: 'http://localhost:3000/api'})
 
-const url = 'https://viztech-systems.vercel.app/api'
+// const url = 'http://localhost:3000/api'
 
-export const fetchJobs = () => axios.get(`${url}/jobs`)
-export const fetchJob = (id) => axios.get(`${url}/jobs/${id}`)
-export const createJob = (newJob) => axios.post(`${url}/jobs`, newJob)
-export const updateJob = (id, updatedJob) => axios.put(`${url}/jobs?jobId=${id}`, updatedJob)
-export const deleteJob = (id) => axios.delete(`${url}/jobs?jobId=${id}`)
+// const url = 'https://viztech-systems.vercel.app/api'
 
-export const fetchResumes = () => axios.get(`${url}/resume`)
-export const createResume = (resume) => axios.post(`${url}/resume`, resume)
-export const deleteResume = (id) => axios.delete(`${url}/resume?resumeId=${id}`)
+export const fetchJobs = () => axiosURL.get('/jobs')
+export const fetchJob = (id) => axiosURL.get(`/jobs/${id}`)
+export const createJob = (newJob) => axiosURL.post('/jobs', newJob)
+export const updateJob = (id, updatedJob) => axiosURL.put(`/jobs?jobId=${id}`, updatedJob)
+export const deleteJob = (id) => axiosURL.delete(`/jobs?jobId=${id}`)
 
+export const fetchResumes = () => axiosURL.get('/resume')
+export const createResume = (resume) => axiosURL.post('/resume', resume)
+export const deleteResume = (id) => axiosURL.delete(`/resume?resumeId=${id}`)
 
+export const signUpAdmin = (adminData) => axiosURL.post('/signup', adminData)
+export const signInAdmin = (adminData) => axiosURL.post('/signin', adminData)
 
 // export default axiosAPI

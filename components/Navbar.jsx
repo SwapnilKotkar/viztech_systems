@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
-import { useLoginContext } from "../context/loginContext";
+import { logoutAdmin } from "../actions/admin";
 
 const Navbar = () => {
-  const { loginStatus, handleLogout } = useLoginContext();
+  const dispatch = useDispatch();
+
+  const router = useRouter();
 
   const [open, setOpen] = useState(false);
+
+  const [admin, setAdmin] = useState();
 
   const menuItems = [
     { name: "Home", href: "/" },
@@ -14,6 +20,16 @@ const Navbar = () => {
     { name: "Contact Us", href: "/contact" },
     { name: "Careers", href: "/careers" },
   ];
+
+  const logout = () => {
+    dispatch(logoutAdmin());
+  };
+
+  useEffect(() => {
+    // const token = admin?.token;
+
+    setAdmin(JSON.parse(localStorage.getItem("profile")));
+  }, [router.query]);
 
   return (
     <div className="max-w-screen-2xl px-4 md:px-8 mx-auto">
@@ -49,7 +65,7 @@ const Navbar = () => {
           ))}
         </nav>
 
-        {loginStatus ? (
+        {admin ? (
           <div className="flex">
             <Link
               href={"/admin"}
@@ -60,7 +76,7 @@ const Navbar = () => {
             <Link
               href={"/"}
               className="hidden lg:inline-block bg-[#6B54F5] hover:bg-[#4e38cc] focus-visible:ring ring-indigo-300 text-white font-semibold text-sm md:text-base text-center rounded-lg outline-none transition duration-100 px-8 py-3"
-              onClick={handleLogout}
+              onClick={logout}
             >
               Logout
             </Link>
@@ -111,7 +127,7 @@ const Navbar = () => {
               </Link>
             ))}
 
-            {loginStatus ? (
+            {admin ? (
               <>
                 <Link
                   href={"/admin"}
@@ -124,7 +140,7 @@ const Navbar = () => {
                   <Link
                     href={"/"}
                     className="block bg-color bg-[#010851] text-white font-semibold  text-sm md:text-base text-center rounded-lg outline-none transition duration-100 px-8 py-3"
-                    onClick={handleLogout}
+                    onClick={logout}
                   >
                     Logout
                   </Link>

@@ -13,10 +13,8 @@ const JobDetails = () => {
   const router = useRouter();
   const { job_details } = router.query;
 
-  const [jobdata, setJobdata] = useState({});
   const [fileStatus, setFileStatus] = useState(false);
 
-  let title;
   const uniqueID = new Date().getTime();
 
   const [candidateData, setCandidateData] = useState({

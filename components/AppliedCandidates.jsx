@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import toast from "react-hot-toast";
-import Router from "next/router";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { BsFillTrashFill, BsPersonCircle } from "react-icons/bs";
 import { getResumes, deleteResume } from "../actions/Resumes";
@@ -18,26 +16,6 @@ const AppliedCandidates = () => {
     "Action",
   ];
 
-  const handleRemove = async (id) => {
-    const res = await fetch(`/api/resumes/resumes/?resumeId=${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (res.status === 200) {
-      toast.remove();
-      toast.success("Candidate Deleted");
-      setTimeout(() => {
-        Router.push("/admin");
-      }, 500);
-    } else {
-      toast.remove();
-      toast.error("Failed to delete");
-    }
-  };
-
   useEffect(() => {
     dispatch(getResumes());
   }, [dispatch]);
@@ -53,74 +31,78 @@ const AppliedCandidates = () => {
               </a>
             </div>
           </div>
-          <div className="overflow-x-auto relative shadow-md sm:rounded-lg my-4">
-            <table className="w-full text-left text-gray-500">
-              <thead className="text-sm md:text-lg text-white bg-[#6C63FF]">
-                <tr>
-                  {tableHeadders.map((item, index) => (
-                    <th
-                      key={index}
-                      scope="col"
-                      className="py-3 px-6 font-semibold border-r"
-                    >
-                      {item}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                {resumes?.map((resume) => (
-                  <tr
-                    key={resume._id}
-                    className="bg-white border-b border-gray-300 hover:bg-gray-200 "
-                  >
-                    <th
-                      scope="row"
-                      className="flex items-center py-4 px-6 text-gray-900 whitespace-nowrap dark:text-white"
-                    >
-                      <span>
-                        <BsPersonCircle className="h-7 w-7 text-gray-500" />
-                      </span>
-                      <div className="pl-3">
-                        <div className="text-base text-gray-600 font-semibold">
-                          {resume.fullName}
-                        </div>
-                        <div className="font-normal text-gray-700">
-                          {resume.emailID}
-                        </div>
-                      </div>
-                    </th>
-                    <td className="py-4 px-6">{resume.title}</td>
-                    <td className="py-4 px-6">{resume.notice_period}</td>
-                    <td className="py-4 px-6 max-w-sm">{resume.comments}</td>
-                    <td className="py-4 px-6">
-                      <a
-                        href={resume.resumeURL}
-                        target="_blank"
-                        rel="noreferrer"
+          {resumes ? (
+            <div className="overflow-x-auto relative shadow-md sm:rounded-lg my-4">
+              <table className="w-full text-left text-gray-500">
+                <thead className="text-sm md:text-lg text-white bg-[#6C63FF]">
+                  <tr>
+                    {tableHeadders.map((item, index) => (
+                      <th
+                        key={index}
+                        scope="col"
+                        className="py-3 px-6 font-semibold border-r"
                       >
+                        {item}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody className="text-sm">
+                  {resumes?.map((resume) => (
+                    <tr
+                      key={resume._id}
+                      className="bg-white border-b border-gray-300 hover:bg-gray-200 "
+                    >
+                      <th
+                        scope="row"
+                        className="flex items-center py-4 px-6 text-gray-900 whitespace-nowrap dark:text-white"
+                      >
+                        <span>
+                          <BsPersonCircle className="h-7 w-7 text-gray-500" />
+                        </span>
+                        <div className="pl-3">
+                          <div className="text-base text-gray-600 font-semibold">
+                            {resume.fullName}
+                          </div>
+                          <div className="font-normal text-gray-700">
+                            {resume.emailID}
+                          </div>
+                        </div>
+                      </th>
+                      <td className="py-4 px-6">{resume.title}</td>
+                      <td className="py-4 px-6">{resume.notice_period}</td>
+                      <td className="py-4 px-6 max-w-sm">{resume.comments}</td>
+                      <td className="py-4 px-6">
                         <a
-                          className="font-medium text-blue-500 hover:underline md:mx-1 my-1"
+                          href={resume.resumeURL}
                           target="_blank"
+                          rel="noreferrer"
+                          className="font-medium text-blue-500 hover:underline md:mx-1 my-1"
                         >
                           View resume
                         </a>
-                      </a>
-                    </td>
-                    <td className="py-4 px-6">
-                      <button
-                        type="button"
-                        onClick={() => dispatch(deleteResume(resume._id))}
-                        className="text-xl text-red-500 md:ml-3 my-1"
-                      >
-                        <BsFillTrashFill />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                      </td>
+                      <td className="py-4 px-6">
+                        <button
+                          type="button"
+                          onClick={() => dispatch(deleteResume(resume._id))}
+                          className="text-xl text-red-500 md:ml-3 my-1"
+                        >
+                          <BsFillTrashFill />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div className=" p-4">
+              <span className="text-xl font-bold text-gray-700">
+                Loading resumes....
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </>

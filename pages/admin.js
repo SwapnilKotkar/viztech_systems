@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import View from "../components/View";
 import { BiPlus } from "react-icons/bi";
 import PostJob from "../components/PostJob";
 
 const Admin = () => {
+  const router = useRouter();
+
   const [value, setValue] = useState("Jobs");
 
   const [currentId, setCurrentId] = useState(null);
@@ -17,8 +20,8 @@ const Admin = () => {
   const filters = ["Jobs", "Applied Candidates"];
 
   useEffect(() => {
-    if (!localStorage.getItem("signin_token")) {
-      Router.push("/login");
+    if (!localStorage.getItem("profile")) {
+      router.push("/login");
     }
   }, []);
 

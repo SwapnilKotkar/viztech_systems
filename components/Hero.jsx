@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -13,9 +14,11 @@ const Hero = () => {
             placeholder text. It shares characteristics of real text.
           </p>
           <div>
+            <Link href={'/about'}>
             <button className="px-7 lg:px-10 py-3 lg:py-4 text-sm lg:text-base font-semibold text-white bg-[#6B54F5] hover:bg-[#4e38cc] rounded-md">
               Know more
             </button>
+            </Link>
           </div>
         </div>
       </section>
