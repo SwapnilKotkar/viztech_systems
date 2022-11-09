@@ -1,20 +1,24 @@
 import React from "react";
+import Image from "next/image";
 
 const About = () => {
   return (
     <>
       <div className="max-w-screen-2xl px-4 mb-20 md:px-8 mx-auto space-y-10 lg:space-y-36">
-      <div className="bg-banner py-5 lg:py-10 flex justify-center rounded-xl rounded-bl-[100px] rounded-tr-[100px]">
-        <p className="text-white font-bold text-xl lg:text-4xl">Welcome to <span className="text-[#2400FF]">Viztech Systems</span></p>
-      </div>
+        <div className="bg-banner py-5 lg:py-10 flex justify-center rounded-xl rounded-bl-[100px] rounded-tr-[100px]">
+          <p className="text-white font-bold text-xl lg:text-4xl">
+            Welcome to <span className="text-[#2400FF]">Viztech Systems</span>
+          </p>
+        </div>
         <div className="flex flex-col lg:flex-row lg:space-x-40">
           <div className="flex-1 flex justify-center">
             <div class="h-64 md:h-auto overflow-hidden flex justify-center border border-gray-300 rounded-2xl">
-              <img
+              <Image
                 src="/team.svg"
-                loading="lazy"
                 alt="Photo by Martin Sanchez"
-                class="w-2/3 lg:w-full"
+                priority
+                height={600}
+                width={600}
               />
             </div>
           </div>
@@ -55,11 +59,12 @@ const About = () => {
           </div>
           <div className="flex-1 flex justify-center">
             <div className="h-64 md:h-auto overflow-hidden flex justify-center border border-gray-300 rounded-2xl">
-              <img
+              <Image
                 src="/meeting.svg"
-                loading="lazy"
                 alt="Photo by Martin Sanchez"
-                class="w-2/3 lg:w-full"
+                priority
+                height={600}
+                width={700}
               />
             </div>
           </div>
@@ -67,7 +72,9 @@ const About = () => {
       </div>
       <div className="bg-banner flex py-10 lg:py-14">
         <div className="max-w-screen-2xl px-4 md:px-8 mx-auto flex space-x-10">
-          <p className="flex items-center text-white font-bold text-xl lg:text-3xl">Professional Team.</p>{" "}
+          <p className="flex items-center text-white font-bold text-xl lg:text-3xl">
+            Professional Team.
+          </p>{" "}
           <div>
             <button className="px-7 lg:px-10 py-3 lg:py-4 text-black text-sm lg:text-base font-semibold bg-white hover:bg-[#4e38cc] rounded-md">
               Contact Us

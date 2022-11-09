@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const SectionTwo = () => {
   return (
@@ -7,11 +8,12 @@ const SectionTwo = () => {
       <div className="flex flex-col lg:flex-row lg:space-x-40">
         <div>
           <div className="h-64 md:h-auto overflow-hidden flex justify-center ">
-            <img
+            <Image
               src="/software.svg"
-              loading="lazy"
               alt="Photo by Martin Sanchez"
-              className="w-2/3 lg:w-full"
+              priority
+              height={600}
+              width={700}
             />
           </div>
         </div>
@@ -26,42 +28,43 @@ const SectionTwo = () => {
             placeholder text. It shares characteristics of real text.
           </p>
           <div>
-          <Link href={'/about'}>
-          <button className="px-7 lg:px-10 py-3 lg:py-4 text-sm lg:text-base font-semibold text-white bg-[#6B54F5] hover:bg-[#4e38cc] rounded-md">
-              About Us
-            </button>
-          </Link>
+            <Link href={"/about"}>
+              <button className="px-7 lg:px-10 py-3 lg:py-4 text-sm lg:text-base font-semibold text-white bg-[#6B54F5] hover:bg-[#4e38cc] rounded-md">
+                About Us
+              </button>
+            </Link>
           </div>
         </div>
       </div>
       <div className="flex flex-col-reverse lg:flex-row lg:space-x-40">
         <div className="space-y-4 flex flex-col justify-center mt-10">
           <h1 className="text-gray-800 text-2xl sm:text-3xl lg:text-4xl font-bold md:text-left lg:leading-normal">
-          We Build Lasting Relationships Between <span className="text-[#9A7AF1]">Candidates & Business.</span>
+            We Build Lasting Relationships Between{" "}
+            <span className="text-[#9A7AF1]">Candidates & Business.</span>
           </h1>
           <p className="text-base lg:text-xl text-gray-600">
             This is a section of some simple filler text, also known as
             placeholder text. It shares characteristics of real text.
           </p>
           <div>
-          <Link href={'/contact'}>
-          <button className="px-7 lg:px-10 py-3 lg:py-4 text-sm lg:text-base font-semibold text-white bg-[#6B54F5] hover:bg-[#4e38cc] rounded-md">
-              Contact Us
-            </button>
+            <Link href={"/contact"}>
+              <button className="px-7 lg:px-10 py-3 lg:py-4 text-sm lg:text-base font-semibold text-white bg-[#6B54F5] hover:bg-[#4e38cc] rounded-md">
+                Contact Us
+              </button>
             </Link>
           </div>
         </div>
         <div>
           <div className="h-64 md:h-auto overflow-hidden flex justify-center">
-            <img
+            <Image
               src="/development.svg"
-              loading="lazy"
               alt="Photo by Martin Sanchez"
-              className="w-2/3 lg:w-full"
+              priority
+              height={600}
+              width={900}
             />
           </div>
         </div>
-
       </div>
     </div>
   );
