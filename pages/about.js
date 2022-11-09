@@ -3,11 +3,11 @@ import React from "react";
 const About = () => {
   return (
     <>
-      <div class="max-w-screen-2xl px-4 my-10 md:px-8 mx-auto space-y-10 lg:space-y-36">
+      <div className="max-w-screen-2xl px-4 mb-20 md:px-8 mx-auto space-y-10 lg:space-y-36">
       <div className="bg-banner py-5 lg:py-10 flex justify-center rounded-xl rounded-bl-[100px] rounded-tr-[100px]">
         <p className="text-white font-bold text-xl lg:text-4xl">Welcome to <span className="text-[#2400FF]">Viztech Systems</span></p>
       </div>
-        <div class="flex flex-col lg:flex-row lg:space-x-40">
+        <div className="flex flex-col lg:flex-row lg:space-x-40">
           <div className="flex-1 flex justify-center">
             <div class="h-64 md:h-auto overflow-hidden flex justify-center border border-gray-300 rounded-2xl">
               <img
@@ -19,8 +19,8 @@ const About = () => {
             </div>
           </div>
 
-          <div class="flex-1 space-y-4 flex flex-col mt-10 lg:mt-0">
-            <h1 class="text-gray-800 text-2xl sm:text-3xl lg:text-4xl font-bold md:text-left lg:leading-normal">
+          <div className="flex-1 space-y-4 flex flex-col mt-10 lg:mt-0">
+            <h1 className="text-gray-800 text-2xl sm:text-3xl lg:text-4xl font-bold md:text-left lg:leading-normal">
               You Make The Hire.{" "}
               <span className="text-[#9A7AF1]">We Make It Simple.</span>
             </h1>
@@ -37,9 +37,9 @@ const About = () => {
             </p>
           </div>
         </div>
-        <div class="flex flex-col-reverse lg:flex-row lg:space-x-40">
-          <div class="flex-1 space-y-4 flex flex-col mt-10 lg:mt-0">
-            <h1 class="text-gray-800 text-2xl sm:text-3xl lg:text-4xl font-bold md:text-left lg:leading-normal">
+        <div className="flex flex-col-reverse lg:flex-row lg:space-x-40">
+          <div className="flex-1 space-y-4 flex flex-col mt-10 lg:mt-0">
+            <h1 className="text-gray-800 text-2xl sm:text-3xl lg:text-4xl font-bold md:text-left lg:leading-normal">
               We Build Lasting Relationships Between{" "}
               <span className="text-[#9A7AF1]">Candidates & Business.</span>
             </h1>
@@ -54,7 +54,7 @@ const About = () => {
             </p>
           </div>
           <div className="flex-1 flex justify-center">
-            <div class="h-64 md:h-auto overflow-hidden flex justify-center border border-gray-300 rounded-2xl">
+            <div className="h-64 md:h-auto overflow-hidden flex justify-center border border-gray-300 rounded-2xl">
               <img
                 src="/meeting.svg"
                 loading="lazy"
