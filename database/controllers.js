@@ -32,6 +32,10 @@ export const signinAdmin = async (req, res) => {
 export const signupAdmin = async (req, res) => {
   const { email, password } = req.body;
 
+  console.log("email", email)
+  console.log("password", password)
+
+
   try {
     const user = await Admin.findOne({ email: email });
 
@@ -43,7 +47,7 @@ export const signupAdmin = async (req, res) => {
 
     const token = jwt.sign({email: newUser.email, id: newUser._id}, process.env.JWT_SECRET_KEY, { expiresIn: "10d" })
 
-    res.status(200).json({ result, token })
+    res.status(200).json({ result: newUser, token })
 
   } catch (error) {
     res.status(500).json({ message: 'something went wrong' })
