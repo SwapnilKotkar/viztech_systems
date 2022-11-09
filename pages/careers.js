@@ -38,7 +38,24 @@ const Careers = () => {
         </p>
       </div>
 
-      {jobs ? (
+      {!jobs.length ? (
+        <div className=" flex justify-center p-4">
+          <div class="lds-spinner">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      ) : (
         jobs?.map((job, index) => (
           <div key={index} className="my-4">
             <div className=" flex flex-col md:flex-row space-y-2 md:p-6 py-6 border-t-2 border-gray-400">
@@ -70,12 +87,6 @@ const Careers = () => {
             </div>
           </div>
         ))
-      ) : (
-        <div className=" p-4">
-          <span className="text-xl font-bold text-gray-700">
-            Loading jobs....
-          </span>
-        </div>
       )}
     </div>
   );

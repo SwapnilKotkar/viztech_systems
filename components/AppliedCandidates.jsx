@@ -31,7 +31,24 @@ const AppliedCandidates = () => {
               </a>
             </div>
           </div>
-          {resumes ? (
+          {!resumes.length ? (
+            <div className=" flex justify-center p-4">
+          <div class="lds-spinner">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+          ) : (
             <div className="overflow-x-auto relative shadow-md sm:rounded-lg my-4">
               <table className="w-full text-left text-gray-500">
                 <thead className="text-sm md:text-lg text-white bg-[#6C63FF]">
@@ -95,12 +112,6 @@ const AppliedCandidates = () => {
                   ))}
                 </tbody>
               </table>
-            </div>
-          ) : (
-            <div className=" p-4">
-              <span className="text-xl font-bold text-gray-700">
-                Loading resumes....
-              </span>
             </div>
           )}
         </div>

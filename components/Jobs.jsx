@@ -28,7 +28,24 @@ const Jobs = ({ setCurrentId, setShow }) => {
 
   return (
     <>
-      {jobs ? (
+      {!jobs.length ? (
+        <div className=" flex justify-center p-4">
+          <div class="lds-spinner">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      ) : (
         <div className="my-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
           {jobs?.map((job, index) => (
             <div
@@ -90,12 +107,6 @@ const Jobs = ({ setCurrentId, setShow }) => {
               </div>
             </div>
           ))}
-        </div>
-      ) : (
-        <div className=" p-4">
-          <span className="text-xl font-bold text-gray-700">
-            Loading jobs....
-          </span>
         </div>
       )}
     </>
