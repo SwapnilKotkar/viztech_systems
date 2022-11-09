@@ -9,6 +9,8 @@ import { configureStore } from '@reduxjs/toolkit'
 
 const store = createStore(rootReducer, compose(applyMiddleware(thunk)));
 
+const store1 = configureStore({reducer: rootReducer, middleware: [thunk]})
+
 function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
