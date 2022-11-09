@@ -78,7 +78,7 @@ const JobDetails = () => {
     });
 
     setTimeout(() => {
-      router.push("/careers");
+      router.push("/");
     }, 500);
   };
 

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import toast from "react-hot-toast";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { MdAlternateEmail } from "react-icons/md";
@@ -27,7 +26,8 @@ const Login = () => {
     dispatch(loginAdmin(login));
 
     setTimeout(() => {
-      router.push("/admin");
+      // router.push("/");
+      window.location.reload('/')
     }, 500);
 
     setLogin({
@@ -38,7 +38,7 @@ const Login = () => {
 
   useEffect(() => {
     if (localStorage.getItem("profile")) {
-      router.push("/admin");
+      router.push("/");
     }
   }, []);
 
