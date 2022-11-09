@@ -27,7 +27,7 @@ const Login = () => {
 
     setTimeout(() => {
       // router.push("/");
-      window.location.reload('/')
+      window.location.replace('/')
     }, 500);
 
     setLogin({
