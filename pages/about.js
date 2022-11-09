@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const About = () => {
   return (
@@ -74,11 +75,13 @@ const About = () => {
         <div className="max-w-screen-2xl px-4 md:px-8 mx-auto flex space-x-10">
           <p className="flex items-center text-white font-bold text-xl lg:text-3xl">
             Professional Team.
-          </p>{" "}
+          </p>
           <div>
-            <button className="px-7 lg:px-10 py-3 lg:py-4 text-black text-sm lg:text-base font-semibold bg-white hover:bg-[#4e38cc] rounded-md">
-              Contact Us
-            </button>
+            <Link href={"/contact"}>
+              <button className="px-7 lg:px-10 py-3 lg:py-4 text-black text-sm lg:text-base font-semibold bg-white hover:bg-[#4e38cc] rounded-md">
+                Contact Us
+              </button>
+            </Link>
           </div>
         </div>
       </div>
