@@ -149,7 +149,7 @@ const PostJob = ({ show, setShow, currentId, setCurrentId }) => {
             <div>
               <button
                 type="submit"
-                className="px-7 lg:px-10 py-3 text-sm lg:text-base font-semibold text-white bg-[#6B54F5] hover:bg-[#4e38cc] rounded-md"
+                className="px-7 lg:px-10 py-3 text-sm lg:text-base font-semibold text-white border-2 border-[#6B54F5] bg-[#6B54F5] hover:bg-[#4e38cc] rounded-md"
               >
                 Post
               </button>
