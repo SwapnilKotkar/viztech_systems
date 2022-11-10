@@ -153,6 +153,18 @@ const PostJob = ({ show, setShow, currentId, setCurrentId }) => {
               >
                 Post
               </button>
+              <div
+              onClick={clear}
+                className="inline-block px-7 lg:px-10 py-3 text-sm lg:text-base text-[#6B54F5] font-semibold border-2 border-[#6B54F5] rounded-md cursor-pointer"
+              >
+                Clear
+              </div>
+              <div
+              onClick={()=>setShow((prev)=> !prev)}
+                className="inline-block px-7 lg:px-10 py-3 text-sm lg:text-base text-[#6B54F5] font-semibold border-2 border-[#6B54F5] rounded-md cursor-pointer"
+              >
+                Cancel
+              </div>
             </div>
           </form>
         </div>
