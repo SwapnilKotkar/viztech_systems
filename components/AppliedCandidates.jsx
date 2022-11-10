@@ -86,7 +86,7 @@ const AppliedCandidates = () => {
                           </div>
                         </div>
                       </th>
-                      <td className="py-4 px-6">{resume.title}</td>
+                      <td className="py-4 px-6">{resume.applyingFor}</td>
                       <td className="py-4 px-6">{resume.notice_period}</td>
                       <td className="py-4 px-6 max-w-sm">{resume.comments}</td>
                       <td className="py-4 px-6">
