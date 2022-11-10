@@ -30,7 +30,7 @@ const Jobs = ({ setCurrentId, setShow }) => {
     <>
       {!jobs.length ? (
         <div className=" flex justify-center p-4">
-          <div class="lds-spinner">
+          <div className="lds-spinner">
             <div></div>
             <div></div>
             <div></div>

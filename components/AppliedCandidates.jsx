@@ -23,7 +23,7 @@ const AppliedCandidates = () => {
   return (
     <>
       <div className="pt-3 pb-10">
-        <div className="max-w-7xl px-4 mx-auto sm:px-6 lg:px-8">
+        <div className="mx-auto">
           <div className="py-4 lg:pt-4 lg:col-span-2">
             <div className="flex justify-center">
               <a href="" className="text-2xl font-bold text-[#6C63FF]">
@@ -33,7 +33,7 @@ const AppliedCandidates = () => {
           </div>
           {!resumes.length ? (
             <div className=" flex justify-center p-4">
-          <div class="lds-spinner">
+          <div className="lds-spinner">
             <div></div>
             <div></div>
             <div></div>

@@ -3,7 +3,9 @@ import { createJob, updateJob } from "../actions/jobs";
 import { useSelector, useDispatch } from "react-redux";
 
 const PostJob = ({ show, setShow, currentId, setCurrentId }) => {
-  const job = useSelector((state) => currentId ? state.jobsReducer.find((j) => j._id == currentId ) : null);
+  const job = useSelector((state) =>
+    currentId ? state.jobsReducer.find((j) => j._id == currentId) : null
+  );
   const dispatch = useDispatch();
 
   const date = new Date().toISOString().slice(0, 10);
@@ -33,6 +35,13 @@ const PostJob = ({ show, setShow, currentId, setCurrentId }) => {
       dispatch(createJob(formData));
     }
 
+    clear();
+
+    setShow(false);
+  };
+
+  const clear = () => {
+    setCurrentId(null);
     setFormData({
       title: "",
       location: "",
@@ -43,14 +52,11 @@ const PostJob = ({ show, setShow, currentId, setCurrentId }) => {
       skills: "",
       description: "",
     });
-
-    setShow(false);
   };
 
   useEffect(() => {
-    if(job) setFormData(job)
-  }, [job])
-  
+    if (job) setFormData(job);
+  }, [job]);
 
   return (
     <>
@@ -126,7 +132,10 @@ const PostJob = ({ show, setShow, currentId, setCurrentId }) => {
               required
             ></textarea>
             <div>
-              <button type="submit" className="px-7 lg:px-10 py-3 text-sm lg:text-base font-semibold text-white bg-[#6B54F5] hover:bg-[#4e38cc] rounded-md">
+              <button
+                type="submit"
+                className="px-7 lg:px-10 py-3 text-sm lg:text-base font-semibold text-white bg-[#6B54F5] hover:bg-[#4e38cc] rounded-md"
+              >
                 Post
               </button>
             </div>
