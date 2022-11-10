@@ -13,7 +13,7 @@ const About = () => {
         </div>
         <div className="flex flex-col lg:flex-row lg:space-x-40">
           <div className="flex-1 flex justify-center">
-            <div class="h-64 md:h-auto overflow-hidden flex justify-center border border-gray-300 rounded-2xl">
+            <div className="overflow-hidden flex justify-center border border-gray-300 rounded-2xl">
               <Image
                 src="/team.svg"
                 alt="Photo by Martin Sanchez"
@@ -59,7 +59,7 @@ const About = () => {
             </p>
           </div>
           <div className="flex-1 flex justify-center">
-            <div className="h-64 md:h-auto overflow-hidden flex justify-center border border-gray-300 rounded-2xl">
+            <div className="overflow-hidden flex justify-center border border-gray-300 rounded-2xl">
               <Image
                 src="/meeting.svg"
                 alt="Photo by Martin Sanchez"

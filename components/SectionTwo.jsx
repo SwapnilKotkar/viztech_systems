@@ -7,7 +7,7 @@ const SectionTwo = () => {
     <div className="max-w-screen-2xl px-4 my-24 md:px-8 mx-auto space-y-10 lg:space-y-36">
       <div className="flex flex-col lg:flex-row lg:space-x-40">
         <div>
-          <div className="h-64 md:h-auto overflow-hidden flex justify-center ">
+          <div className="overflow-hidden flex justify-center ">
             <Image
               src="/software.svg"
               alt="Photo by Martin Sanchez"
@@ -55,7 +55,7 @@ const SectionTwo = () => {
           </div>
         </div>
         <div>
-          <div className="h-64 md:h-auto overflow-hidden flex justify-center">
+          <div className="overflow-hidden flex justify-center">
             <Image
               src="/development.svg"
               alt="Photo by Martin Sanchez"
