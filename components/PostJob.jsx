@@ -3,13 +3,13 @@ import { createJob, updateJob } from "../actions/jobs";
 import { useSelector, useDispatch } from "react-redux";
 import { BiPlus } from "react-icons/bi";
 
-const PostJob = ({show, setShow, currentId, setCurrentId }) => {
+const PostJob = ({ show, setShow, currentId, setCurrentId }) => {
   const job = useSelector((state) =>
     currentId ? state.jobsReducer.find((j) => j._id == currentId) : null
   );
   const dispatch = useDispatch();
 
-  const date = new Date().toISOString().slice(0, 10);
+  const date = new Date().toUTCString().slice(5, 16);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -23,9 +23,9 @@ const PostJob = ({show, setShow, currentId, setCurrentId }) => {
   });
 
   const handleClick = () => {
-    setShow((prev) => !prev)
+    setShow((prev) => !prev);
     clear();
-  }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -66,15 +66,15 @@ const PostJob = ({show, setShow, currentId, setCurrentId }) => {
 
   return (
     <>
-    <div className="w-full flex justify-end items-center mb-4">
-          <button
-            className="border-2 bg-[#6C63FF] text-white rounded-[100px] py-3 px-7 flex items-center space-x-1"
-            onClick={ handleClick}
-          >
-            <BiPlus className="text-white" size={20} />
-            <h1>Add new job</h1>
-          </button>
-        </div>
+      <div className="w-full flex justify-end items-center mb-4">
+        <button
+          className="border-2 bg-[#6C63FF] text-white rounded-[100px] py-3 px-7 flex items-center space-x-1"
+          onClick={handleClick}
+        >
+          <BiPlus className="text-white" size={20} />
+          <h1>Add new job</h1>
+        </button>
+      </div>
       <div className={`${show ? "block" : "hidden"} lg:flex-1 my-5 lg:my-0`}>
         <div className=" py-6 px-3 bg-white rounded-md">
           <form className="space-y-8" method="POST" onSubmit={handleSubmit}>

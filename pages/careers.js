@@ -61,7 +61,7 @@ const Careers = () => {
             <div className=" flex flex-col md:flex-row space-y-2 md:p-6 py-6 border-t-2 border-gray-400">
               <div className="space-y-3 md:w-[80%]">
                 <p className="text-2xl font-semibold">{job.title}</p>
-                <p>
+                <p className="text-gray-800">
                   {truncate(job.description, 200)}{" "}
                   <span className="font-bold">...</span>{" "}
                 </p>
@@ -73,6 +73,7 @@ const Careers = () => {
                     {job.experience} yrs experience{" "}
                   </div>
                 </div>
+                <div><h1 className="italic text-gray-700">Posted on: {job.posted_on}</h1></div>
               </div>
               <div className="md:w-[20%] flex justify-end items-start">
                 <Link href={`/job/${job._id}`}>

@@ -50,7 +50,7 @@ const Jobs = ({ setCurrentId, setShow }) => {
           {jobs?.map((job, index) => (
             <div
               key={index}
-              className="px-5 py-7 space-y-5 bg-white border border-gray-300 rounded-lg"
+              className="px-5 py-7 space-y-5 flex flex-col justify-between bg-white border border-gray-300 rounded-lg"
             >
               <p className="text-gray-900 font-bold text-lg md:text-xl lg:text-2xl">
                 {job.title}
@@ -82,11 +82,12 @@ const Jobs = ({ setCurrentId, setShow }) => {
                 </div>
               </div>
               <p className="text-gray-600">{truncate(job.description, 120)} </p>
-              <div className="flex justify-end">
+              <div className="flex justify-between">
+              <div className="flex items-end text-gray-600 italic text-sm md:text-base">Posted on: {job.posted_on}</div>
                 <div className="space-x-2">
                   <div className="inline-block">
                     <button
-                      className="border-2 border-[#6C63FF] text-[#6C63FF] rounded-[100px] py-2 px-8"
+                      className="border-2 border-[#6C63FF] text-sm md:text-base text-[#6C63FF] rounded-[100px] py-2 px-3 sm:px-8"
                       onClick={() => dispatch(deleteJob(job._id))}
                     >
                       Delete
@@ -94,7 +95,7 @@ const Jobs = ({ setCurrentId, setShow }) => {
                   </div>
                   <div className="inline-block" onClick={handleChange}>
                     <button
-                      className="border-2 bg-[#6C63FF] text-white rounded-[100px] py-2 px-11"
+                      className="border-2 border-[#6C63FF] bg-[#6C63FF] text-sm md:text-base text-white rounded-[100px] py-2 px-5 sm:px-11"
                       onClick={() => setCurrentId(job._id)}
                     >
                       Edit

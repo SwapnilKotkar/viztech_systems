@@ -6,6 +6,7 @@ const jobSchema = mongoose.Schema({
   salary: {type: String},
   experience: {type: String},
   vacancies: {type: String},
+  posted_on: {type: String},
   skills:{type: String},
   description:{type: String},
 });

@@ -99,7 +99,7 @@ const JobDetails = () => {
 
         {job.length > 0 ? (
           <div className=" flex justify-center p-4">
-            <div class="lds-spinner">
+            <div className="lds-spinner">
               <div></div>
               <div></div>
               <div></div>
