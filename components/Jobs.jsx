@@ -14,7 +14,7 @@ const Jobs = ({ setCurrentId, setShow }) => {
   const jobs = useSelector((state) => state.jobsReducer);
 
   const truncate = (str, n) => {
-    return str?.length > n ? str.slice(0, n) : str;
+    return str?.length > n ? str.slice(0, n) + " ..." : str;
   };
 
   const handleChange = () => {
@@ -81,10 +81,7 @@ const Jobs = ({ setCurrentId, setShow }) => {
                   </p>
                 </div>
               </div>
-              <p className="text-gray-600">
-                {truncate(job.description, 120)}{" "}
-                <span className="font-bold">...</span>
-              </p>
+              <p className="text-gray-600">{truncate(job.description, 120)} </p>
               <div className="flex justify-end">
                 <div className="space-x-2">
                   <div className="inline-block">

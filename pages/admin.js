@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import View from "../components/View";
-import { BiPlus } from "react-icons/bi";
 import PostJob from "../components/PostJob";
 
 const Admin = () => {
@@ -44,15 +43,6 @@ const Admin = () => {
               </button>
             </div>
           ))}
-        </div>
-        <div className="w-full flex justify-end items-center mb-4">
-          <button
-            className="border-2 bg-[#6C63FF] text-white rounded-[100px] py-3 px-7 flex items-center space-x-1"
-            onClick={() => setShow((prev) => !prev)}
-          >
-            <BiPlus className="text-white" size={20} />
-            <h1>Add new job</h1>
-          </button>
         </div>
         <PostJob
           show={show}
