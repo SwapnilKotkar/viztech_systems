@@ -146,8 +146,6 @@ export const createResume = async (req, res) => {
   try {
     const resumeData = req.body;
 
-    console.log("resume", resumeData)
-
     Resumes.create(resumeData, function (err, data) {
       return res.status(200).json(data);
     });
