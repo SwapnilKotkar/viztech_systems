@@ -5,7 +5,6 @@ const nextConfig = {
   env:{
     WEBSITE_URL : process.env.WEBSITE_URL,
     MONGODB_URL : process.env.MONGODB_URL,
-    DB_NAME : process.env.DB_NAME,
     JWT_SECRET_KEY : process.env.JWT_SECRET_KEY,
     MY_AWS_ACCESS_KEY_NAME : process.env.MY_AWS_ACCESS_KEY_NAME,
     MY_AWS_SECRET_ACCESS_KEY_NAME : process.env.MY_AWS_SECRET_ACCESS_KEY_NAME,
